@@ -1,4 +1,3 @@
-
 import sys
 import types
 
@@ -29,7 +28,7 @@ class Win32PnpEntity(object):
         self._device_id = None
         self._properties_list = set(x.Name for x in wmi_object.Properties_)
         self._methods_list = set(x.Name for x in wmi_object.Methods_)
-        self._parent = False    # Special value for "not initialized"
+        self._parent = False  # Special value for "not initialized"
         self._children = False  # Special value for "not initialized"
 
         if wmi_object is not None and "DeviceID" in self._properties_list:
@@ -45,7 +44,8 @@ class Win32PnpEntity(object):
             "_children": self._children
         }
         if state["_device_id"] is None:
-            state["_device_id"] = self._wmi_object.Properties_["DeviceID"].Value
+            state["_device_id"] = self._wmi_object.Properties_[
+                "DeviceID"].Value
         return state
 
     @property
@@ -57,7 +57,7 @@ class Win32PnpEntity(object):
 
     @property
     def parent(self):
-        if self._parent == False:
+        if self._parent is False:
             parent = self.Device_Parent
             if parent is None or parent == "":
                 self._parent = None
@@ -68,7 +68,7 @@ class Win32PnpEntity(object):
 
     @property
     def children(self):
-        if self._children == False:
+        if self._children is False:
             children = self.Device_Children
             if children is None or len(children) == 0:
                 self._children = ()
@@ -88,7 +88,10 @@ class Win32PnpEntity(object):
             super(Win32PnpEntity, self).__setattr__(key, value)
 
     def __getattr__(self, key):
-        if key in {"_properties_list", "_methods_list", "_wmi_object", "_device_id", "_parent", "_children"}:
+        if key in {
+                "_properties_list", "_methods_list", "_wmi_object",
+                "_device_id", "_parent", "_children"
+        }:
             if key in self.__dict__:
                 return self.__dict__[key]
             else:
@@ -103,13 +106,18 @@ class Win32PnpEntity(object):
             prop_value = None
             for name, values in pair:
                 if key in values:
-                    prop_value = self.GetDeviceProperties(["DEVPKEY_" + name + "_" + key]).deviceProperties[0]
+                    prop_value = self.GetDeviceProperties(
+                        ["DEVPKEY_" + name + "_" + key]).deviceProperties[0]
                     break
-                elif key.startswith(name + "_") and key[len(name) + 1:] in values:
-                    prop_value = self.GetDeviceProperties(["DEVPKEY_" + key]).deviceProperties[0]
+                elif key.startswith(name + "_") and key[len(name) +
+                                                        1:] in values:
+                    prop_value = self.GetDeviceProperties(
+                        ["DEVPKEY_" + key]).deviceProperties[0]
                     break
-                elif key.startswith("DEVPKEY_" + name + "_") and key[8 + len(name) + 1:] in values:
-                    prop_value = self.GetDeviceProperties([key]).deviceProperties[0]
+                elif key.startswith("DEVPKEY_" + name +
+                                    "_") and key[8 + len(name) + 1:] in values:
+                    prop_value = self.GetDeviceProperties(
+                        [key]).deviceProperties[0]
                     break
             if prop_value:
                 if prop_value.Type == 0:
@@ -135,5 +143,7 @@ class Win32PnpEntity(object):
                         param.Value = kwargs[name]
             else:
                 params = None
-            return wrap_raw_wmi_object(self.raw_object.ExecMethod_(method_name, params))
+            return wrap_raw_wmi_object(
+                self.raw_object.ExecMethod_(method_name, params))
+
         return _method_type(wmi_method, self, Win32PnpEntity)
