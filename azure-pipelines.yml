@@ -24,3 +24,33 @@ jobs:
     displayName: version
   - script: tests\python.exe -m unittest tests.test_wmidevicemanager
     displayName: Test Python
+- job: github_release
+  displayName: GitHub Release
+  pool:
+    vmImage: 'vs2017-win2016'
+  dependsOn: windows
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  steps:
+  - script: git config --global core.autoCRLF false
+    displayName: "Disable git autoCRLF"
+  - checkout: self
+    displayName: "Checkout"
+    fetchDepth: 50
+  - script: python -c "import shutil; shutil.make_archive('wmidevicemanager', 'zip', '.', 'wmidevicemanager')"
+    displayName: Create archive
+  - task: GitHubRelease@0
+    inputs:
+      gitHubConnection: 'masamitsu-murase'
+      repositoryName: '$(Build.Repository.Name)'
+      action: 'create'
+      target: '$(Build.SourceVersion)'
+      tagSource: 'auto'
+      tag: '$(Build.SourceBranchName)'
+      assets: 'wmidevicemanager.zip'
+      assetUploadMode: 'replace'
+      title: 'SampleTitle'
+      releaseNotesSource: 'input'
+      releaseNotes: ''
+      isDraft: true
+      isPreRelease: true
+      addChangeLog: false
