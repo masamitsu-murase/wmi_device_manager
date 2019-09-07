@@ -18,11 +18,11 @@ jobs:
     fetchDepth: 50
   - script: pip install requests
     displayName: Install requests
-  - script: python tests/download_python.py python.exe $(python_version)
+  - script: python utils/download_python.py python.exe $(python_version)
     displayName: Download python
-  - script: tests\python.exe -c "import sys; print(sys.version)"
+  - script: utils\python.exe -c "import sys; print(sys.version)"
     displayName: version
-  - script: tests\python.exe -m unittest tests.test_wmidevicemanager
+  - script: utils\python.exe -m unittest tests.test_wmidevicemanager
     displayName: Test Python
 - job: github_release
   displayName: GitHub Release
