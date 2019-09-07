@@ -1,5 +1,3 @@
-# strings -u -nobanner -n 8 cimwin32.dll | grep ^DEVPKEY
-
 Aep = {
   "AepId",
   "AssociationRetryCount",
@@ -27,7 +25,7 @@ Aep = {
   "ProviderInstanceIds",
   "ProviderName",
   "RefreshDevicePresenceState",
-  "SignalStrength"
+  "SignalStrength",
 }
 
 AepContainer = {
@@ -55,7 +53,7 @@ AepContainer = {
   "SupportsPositioning",
   "SupportsRendering",
   "SupportsTelephony",
-  "SupportsVideo"
+  "SupportsVideo",
 }
 
 AepService = {
@@ -69,7 +67,7 @@ AepService = {
   "ProviderServiceId",
   "ServiceClassFriendlyName",
   "ServiceClassId",
-  "ServiceId"
+  "ServiceId",
 }
 
 Bluetooth = {
@@ -78,11 +76,11 @@ Bluetooth = {
   "AepQuery_LE_ScanInterval",
   "AepQuery_LE_ScanWindow",
   "AepQuery_LE_UseFilteredDiscovery",
+  "AepServiceQuery_CacheMode",
+  "AepServiceQuery_TargetDevice",
   "AepService_PublisherPackageName",
   "AepService_PublisherUserSecurityId",
   "AepService_ServiceGUID",
-  "AepServiceQuery_CacheMode",
-  "AepServiceQuery_TargetDevice",
   "Association_Ext_Param_InboundBlob",
   "ClassOfDevice",
   "ClassOfDevice_Deprecated|DEVPKEY_Bluetooth_DeviceManufacturer",
@@ -109,7 +107,12 @@ Bluetooth = {
   "LastConnectedTime",
   "LastConnectedTime_Deprecated|DEVPKEY_Bluetooth_DeviceModelNumber",
   "LastRawSignalStrengthInDBm",
+  "LastSeenTime",
   "RadioAddress",
+  "RadioAreBRSecureConnectionsSupported",
+  "RadioAreLESecureConnectionsSupported",
+  "RadioAreProximalConnectionsSupported",
+  "RadioEncryptionKeySizeEnforcementSupported",
   "RadioHciRevision",
   "RadioHciVendorFeatures",
   "RadioHciVersion",
@@ -120,7 +123,8 @@ Bluetooth = {
   "RadioLmpVersion",
   "RadioManufacturer",
   "RfcommService_InstanceId",
-  "ServiceGUID"
+  "SecureConnectionPaired",
+  "ServiceGUID",
 }
 
 BluetoothLE = {
@@ -131,11 +135,8 @@ BluetoothLE = {
   "AppearanceSubcategory",
   "Connectable",
   "PrepairingDeviceId",
-  "ScanResponse"
-}
-
-Bthhfenum = {
-  "SupportsRemoteVolume"
+  "ScanResponse",
+  "SecureConnectionPaired",
 }
 
 DasParam = {
@@ -144,7 +145,11 @@ DasParam = {
   "PassiveScanning",
   "QueryFromAppContainerWinRT",
   "StartedFromBackgroundTask",
-  "X"
+  "X",
+}
+
+DevQuery = {
+  "ObjectType",
 }
 
 Device = {
@@ -152,6 +157,8 @@ Device = {
   "Address",
   "AvailableTime",
   "BaseContainerId",
+  "BatteryLevel",
+  "BatteryLow",
   "BiosDeviceName",
   "Bitrates",
   "BusNumber",
@@ -169,22 +176,24 @@ Device = {
   "ConfigurationId",
   "ConnectionStateIsAuthoritative",
   "ContainerId",
+  "DHP_Rebalance_Policy",
+  "DLNACAP",
+  "DLNADOC",
   "DebuggerSafe",
   "DependencyBootSession",
   "DependencyDependents",
   "DependencyProviders",
-  "DeviceCompatFlags",
-  "DeviceDesc",
   "DevNodeStatus",
   "DevType",
-  "DHP_Rebalance_Policy",
-  "DLNACAP",
-  "DLNADOC",
+  "DeviceCompatFlags",
+  "DeviceDesc",
+  "DmaRemappingPolicy",
   "Driver",
   "DriverCoInstallers",
   "DriverDate",
   "DriverDesc",
   "DriverExtendedInfs",
+  "DriverInGroup",
   "DriverIncludedConfigs",
   "DriverIncludedInfs",
   "DriverInfPath",
@@ -196,6 +205,7 @@ Device = {
   "DriverPropPageProvider",
   "DriverProvider",
   "DriverRank",
+  "DriverSoftwareLinks",
   "DriverVersion",
   "EjectionRelations",
   "EnumeratorName",
@@ -223,6 +233,7 @@ Device = {
   "InstallInf",
   "InstallState",
   "InstallStrongName",
+  "InstalledSoftware",
   "InstanceId",
   "IsAssociateableByUserAction",
   "IsConnected",
@@ -249,20 +260,40 @@ Device = {
   "NoConnectSound",
   "Numa_Node",
   "Numa_Proximity_Domain",
+  "OmitFromSystemSpec",
   "OverrideContainerId",
   "Owners",
+  "PDOName",
   "PacketWakeFailedTime",
   "PacketWakeSupported",
+  "PanelColor",
+  "PanelGroup",
+  "PanelHeight",
+  "PanelId",
+  "PanelLength",
+  "PanelPositionX",
+  "PanelPositionY",
+  "PanelPositionZ",
+  "PanelRotationX",
+  "PanelRotationY",
+  "PanelRotationZ",
+  "PanelShape",
+  "PanelSide",
+  "PanelVisible",
+  "PanelWidth",
   "Parent",
-  "PDOName",
   "PendingConfigurationIds",
   "PendingSoftwareInstall",
   "PersistSystemGeneralize",
   "PhysicalDeviceLocation",
+  "PhysicalDeviceLocationJoint",
+  "PhysicalDeviceLocationPanel",
+  "PhysicalDeviceLocationSpatial",
   "PostInstallInProgress",
   "PowerData",
   "PowerRelations",
   "PresenceNotForDevice",
+  "PreventDriverLoad",
   "ProblemCode",
   "ProblemStatus",
   "ProblemStatusOverride",
@@ -291,6 +322,7 @@ Device = {
   "SinkProtocolInfo",
   "SoftRestartSupported",
   "Stack",
+  "StateDirectoryId",
   "SupportedUriSchemes",
   "SupportsAudio",
   "SupportsImages",
@@ -298,13 +330,15 @@ Device = {
   "SupportsSearch",
   "SupportsSetNextAVT",
   "SupportsVideo",
+  "TerminalLuid",
   "Text_Description",
   "TransportRelations",
   "UDN",
   "UINumber",
   "UINumberDescFormat",
+  "UpdateWithUngroupedDrivers",
   "UpperFilters",
-  "UserSelectedDriverInstalled"
+  "UserSelectedDriverInstalled",
 }
 
 DeviceClass = {
@@ -314,18 +348,23 @@ DeviceClass = {
   "ClassInstaller",
   "ClassName",
   "CompatibleFeatureScores",
+  "CompoundLowerFilters",
+  "CompoundUpperFilters",
+  "ConfigFilters",
+  "ConfigNotifyWnfTriggers",
   "Configurable",
   "ConfigurableClassVersion",
   "ConfigurableOverride",
   "ConfigureSchemaSettings",
+  "DHPRebalanceOptOut",
   "DefaultService",
   "DevType",
-  "DHPRebalanceOptOut",
   "Exclusive",
   "FSFilterClass",
   "Icon",
   "IconPath",
   "Inbox",
+  "InstallWizardProvider",
   "LastDeleteDate",
   "LowerFilters",
   "LowerLogoVersion",
@@ -334,8 +373,10 @@ DeviceClass = {
   "NoDisplayClass",
   "NoInstallClass",
   "NoUseClass",
+  "OmitFromSystemSpec",
   "PolicyExempt",
   "PreConfigure",
+  "Primitive",
   "PropPageProvider",
   "ReinstallApplicableDevices",
   "Security",
@@ -343,15 +384,15 @@ DeviceClass = {
   "SilentInstall",
   "SystemCritical",
   "TransactedInstall",
-  "UpperFilters"
+  "UpperFilters",
 }
 
 DeviceContainer = {
   "Address",
   "AlwaysShowDeviceAsConnected",
   "AssociationArray",
-  "AutoPlay_ApplicationID",
   "AutoPlay_AppUserModelID",
+  "AutoPlay_ApplicationID",
   "AutoPlay_AutoplayType",
   "AutoPlay_ContainerAutoplay",
   "AutoPlay_Handler",
@@ -361,16 +402,18 @@ DeviceContainer = {
   "AutoPlay_RegisteredAppsEnabled",
   "AutoPlay_Verb",
   "BaselineExperienceId",
+  "BatteryLevel",
+  "BatteryLow",
   "Category",
+  "CategoryGroup_Desc",
+  "CategoryGroup_Icon",
   "Category_Desc_Plural",
   "Category_Desc_Singular",
   "Category_Icon",
-  "CategoryGroup_Desc",
-  "CategoryGroup_Icon",
   "ConfigFlags",
   "CustomPrivilegedPackageFamilyNames",
-  "DCA_ApplicationID",
   "DCA_AppUserModelID",
+  "DCA_ApplicationID",
   "DCA_DeviceNotificationHandlers",
   "DCA_ItemNameDisplay",
   "DCA_PackageFamilyName",
@@ -419,16 +462,16 @@ DeviceContainer = {
   "RequiresUninstallElevation",
   "UnpairUninstall",
   "Version",
-  "WindowsHardwareLogoCertified"
+  "WindowsHardwareLogoCertified",
 }
 
 DeviceDisplay = {
-  "UserLastAccessTime"
+  "UserLastAccessTime",
 }
 
 DeviceId = {
   "DriverInfMatches",
-  "DriverInfNames"
+  "DriverInfNames",
 }
 
 DeviceInterface = {
@@ -447,27 +490,58 @@ DeviceInterface = {
   "HID_VersionNumber",
   "ReferenceString",
   "Restricted",
+  "SchematicName",
   "Serial_PortName",
   "Serial_UsbProductId",
   "Serial_UsbVendorId",
-  "UnrestrictedAppCapabilities"
+  "UnrestrictedAppCapabilities",
 }
 
 DeviceInterfaceClass = {
   "DefaultInterface",
   "Inbox",
   "Name",
-  "UnrestrictedAppCapabilities"
+  "UnrestrictedAppCapabilities",
 }
 
 DeviceItem = {
   "SetupProgress",
   "State",
-  "Status"
+  "Status",
 }
 
 DeviceItemParam = {
-  "AsyncItemInitDelaysEnumComplete"
+  "AsyncItemInitDelaysEnumComplete",
+}
+
+DevicePanel = {
+  "AdjacentPanels",
+  "Color",
+  "ContainerId",
+  "Group",
+  "Height",
+  "JointDetachable",
+  "JointPanels",
+  "JointPositionCurrent",
+  "JointPositionDefault",
+  "JointPositionMax",
+  "JointPositionMin",
+  "JointRotationCurrent",
+  "JointRotationDefault",
+  "JointRotationMax",
+  "JointRotationMin",
+  "JointSourcePanelEdge",
+  "JointTargetPanelEdge",
+  "JointTargetPanelId",
+  "JointTargetPositionX",
+  "JointTargetPositionY",
+  "JointTargetPositionZ",
+  "JointTargetRotationX",
+  "JointTargetRotationY",
+  "JointTargetRotationZ",
+  "JointType",
+  "Side",
+  "Width",
 }
 
 DeviceSetup = {
@@ -479,17 +553,17 @@ DeviceSetup = {
   "DeviceState",
   "DriverState",
   "FirstInstallDate",
+  "HSA_AvailableCompanionApps",
+  "HSA_AvailableCompatibleApps",
+  "HSA_AvailableEnhancerApps",
+  "HSA_State",
   "HardErrorCount",
   "InstallDate",
   "InstallInProgress",
   "MetadataPackageId",
   "PairedAutomatically",
+  "UXReady",
   "UserRefreshDate",
-  "UXReady"
-}
-
-DevQuery = {
-  "ObjectType"
 }
 
 DriverDatabase = {
@@ -498,51 +572,64 @@ DriverDatabase = {
   "ConfigOptions",
   "Disabled",
   "FilePath",
-  "Loaded",
+  "LastUpdateDate",
   "LoadStatus",
+  "Loaded",
   "NodeName",
   "OemDriverInfFileMap",
   "ProcessorArchitecture",
   "RegistryPath",
+  "SchemaVersion",
   "Selected",
+  "SetupOptions",
+  "SetupStatus",
+  "SystemRoot",
   "UnloadTimeout",
   "Updated",
-  "Version"
+  "Version",
 }
 
 DriverFile = {
   "DriverInfName",
   "Owners",
   "ProtectionClass",
-  "SubDirectory"
+  "SubDirectory",
 }
 
 DriverInfFile = {
   "ActiveConfigurations",
   "ActiveDriverPackage",
   "DriverPackages",
-  "Locked"
+  "Locked",
 }
 
 DriverPackage = {
   "BootCritical",
+  "CatalogFile",
   "ClassGuid",
   "ClassVersion",
   "Configurable",
   "ConfigurableFlags",
   "ConfigurableOverride",
-  "Configurations",
   "ConfigurationScopes",
+  "Configurations",
   "DriverDate",
   "DriverFlightIds",
   "DriverInfName",
+  "DriverPackageId",
+  "DriverRecoveryIds",
   "DriverSetIds",
   "DriverUpdateIds",
   "DriverVersion",
+  "EffectiveFileSize",
+  "ExtensionContractIds",
   "ExtensionId",
   "F6",
+  "FamilyId",
+  "FileSize",
   "FirmwareDependencies",
   "FirmwareDependencyBootSession",
+  "GroupIds",
   "ImportDate",
   "Inbox",
   "Locale",
@@ -559,13 +646,15 @@ DriverPackage = {
   "SignerScore",
   "SourceMediaPath",
   "StatusFlags",
+  "SubmissionId",
   "SystemCritical",
-  "TargetComputerIds"
+  "TargetComputerIds",
+  "UpdateAttempts",
 }
 
 DriverRegKey = {
   "KeyOnly",
-  "Owners"
+  "Owners",
 }
 
 DriverService = {
@@ -581,7 +670,7 @@ DriverService = {
   "ServiceDependencies",
   "StartType",
   "Tag",
-  "Type"
+  "Type",
 }
 
 DrvPkg = {
@@ -590,7 +679,7 @@ DrvPkg = {
   "DocumentationLink",
   "Icon",
   "Model",
-  "VendorWebSite"
+  "VendorWebSite",
 }
 
 FirmwareResource = {
@@ -601,21 +690,42 @@ FirmwareResource = {
   "LowestSupportedVersion",
   "PendingVersion",
   "Type",
-  "Version"
+  "Version",
 }
 
 HdAudBus = {
   "DisableNonSnoop",
-  "ForcedCacheType"
+  "ForcedCacheType",
+}
+
+IPP = {
+  "LocalNetwork",
+  "LocationListQuery",
+  "LocationListResponse",
+  "PrinterKeywordFilter",
+  "PrinterLimit",
+  "PrinterLocationFilter",
+  "PrinterMakeAndModel",
+  "PrinterOffset",
+  "PrinterOrgLocation",
+  "PrinterSortBy",
+  "PrinterTotalCount",
 }
 
 Imaging = {
-  "Port"
+  "Port",
 }
 
 InfraCast = {
+  "AccessPointBssid",
   "ChallengeAep",
-  "DevnodeAep"
+  "DevnodeAep",
+  "HostName_ResolutionMode",
+  "PinSupported",
+  "SinkHostName",
+  "SinkIpAddress",
+  "StreamSecuritySupported",
+  "Supported",
 }
 
 IoT = {
@@ -628,45 +738,46 @@ IoT = {
   "DefaultLang",
   "HardwareVersion",
   "ServiceInterfaces",
-  "SessionPort"
-}
-
-IPP = {
-  "LocationListQuery",
-  "LocationListResponse",
-  "PrinterKeywordFilter",
-  "PrinterLimit",
-  "PrinterLocationFilter",
-  "PrinterOffset",
-  "PrinterOrgLocation",
-  "PrinterQueryUnfiltered",
-  "PrinterSortBy",
-  "PrinterTotalCount"
+  "SessionPort",
 }
 
 KsAudio = {
+  "Controller_DeviceInterface_Path",
   "PacketSize_Constraints",
-  "PacketSize_Constraints2"
+  "PacketSize_Constraints2",
+}
+
+KsMidiPort = {
+  "KsFilterInterfaceId",
+  "KsPinId",
+}
+
+MTPBTH = {
+  "IsConnected_Private",
 }
 
 Mbae = {
   "NetworkAccountId",
-  "NetworkInterfaceId"
+  "NetworkInterfaceId",
 }
 
-MTPBTH = {
-  "IsConnected_Private"
+Midi = {
+  "Device_Tag",
 }
 
 NFP = {
-  "Capabilities"
+  "Capabilities",
+}
+
+PUBSVCS = {
+  "METADATA",
 }
 
 PciDevice = {
+  "AERCapabilityPresent",
   "AcsCapabilityRegister",
   "AcsCompatibleUpHierarchy",
   "AcsSupport",
-  "AERCapabilityPresent",
   "AriSupport",
   "AtomicsSupported",
   "AtsSupport",
@@ -697,7 +808,7 @@ PciDevice = {
   "SriovSupport",
   "SubClass",
   "Uncorrectable_Error_Mask",
-  "Uncorrectable_Error_Severity"
+  "Uncorrectable_Error_Severity",
 }
 
 PciRootBus = {
@@ -714,11 +825,11 @@ PciRootBus = {
   "PCIExpressNativeHotPlugControl",
   "PCIExpressNativePMEControl",
   "PCISegmentGroupsSupport",
+  "SHPCNativeHotPlugControl",
   "SecondaryBusWidth",
   "SecondaryInterface",
-  "SHPCNativeHotPlugControl",
   "SupportedSpeedsAndModes",
-  "SystemMsiSupport"
+  "SystemMsiSupport",
 }
 
 Pos = {
@@ -728,11 +839,19 @@ Pos = {
   "PosDeviceTypes",
   "ProtocolProviderDllName",
   "ProviderId",
-  "SetPairingState"
+  "SetPairingState",
+  "VideoPreviewSupport",
 }
 
-PUBSVCS = {
-  "METADATA"
+Radio = {
+  "ManagerCLSID",
+  "Signature",
+}
+
+SSDP = {
+  "AltLocationInfo",
+  "DevLifeTime",
+  "NetworkLocationInfo",
 }
 
 Smartcard = {
@@ -741,23 +860,22 @@ Smartcard = {
   "Friendly",
   "MachineId",
   "Transport",
-  "VCard"
-}
-
-SSDP = {
-  "AltLocationInfo",
-  "DevLifeTime",
-  "NetworkLocationInfo"
+  "VCard",
 }
 
 Storage = {
+  "Disk_Number",
+  "Gpt_Name",
+  "Gpt_Type",
+  "Mbr_Type",
+  "Partition_Number",
   "Portable",
   "Removable_Media",
-  "System_Critical"
+  "System_Critical",
 }
 
 TSUSB = {
-  "BUS_ENUMERATOR_TAG"
+  "BUS_ENUMERATOR_TAG",
 }
 
 UPNP = {
@@ -765,19 +883,35 @@ UPNP = {
   "FoundOnPublicNetwork",
   "IsDialDevice",
   "IsNetworkInterfacePublic",
-  "WiFiDirectMacAddress"
+  "WiFiDirectMacAddress",
 }
 
 User = {
-  "Provided_Name"
+  "Provided_Name",
 }
 
 WIA = {
-  "DeviceType"
+  "DeviceType",
+}
+
+WSD = {
+  "AepServiceList",
+  "AppSeqInstanceID",
+  "Challenge_Query",
+  "Convert_To_Multicast",
+  "DisableIPPAssociation",
+  "FoundOnPublicNetwork",
+  "Hello_Result",
+  "IPConnectionString",
+  "MetadataUpdated",
+  "PreferredIPAddressFamily",
+  "ResurrectedOfflineDevice",
+  "Supports_DNS",
+  "WiFiDirectMacAddress",
 }
 
 WiFi = {
-  "InterfaceGuid"
+  "InterfaceGuid",
 }
 
 WiFiDirect = {
@@ -787,33 +921,33 @@ WiFiDirect = {
   "FoundWsbService",
   "GroupId",
   "InformationElements",
-  "InfraCastAccessPointBssid",
-  "InfraCastSinkHostName",
   "InterfaceAddress",
   "InterfaceGuid",
   "IsConnected",
   "IsDMGCapable",
-  "IsInfraCastStreamSecuritySupported",
-  "IsInfraCastSupported",
   "IsLegacyDevice",
   "IsMiracastLCPSupported",
   "IsRecentlyAssociated",
   "IsVisible",
+  "LinkQuality",
   "MiracastVersion",
   "NoMiracastAutoProject",
   "ProfileString",
   "Service_Aeps",
   "Services",
-  "SupportedChannelList"
+  "SupportedChannelList",
+  "TransientAssociation",
 }
 
 WiFiDirectParam = {
+  "CachedDiscovery",
   "DisableMiracastAutoProject",
   "DiscoverWSBDocks",
   "EnableAggressiveDiscovery",
+  "EnableFirewallPreconfiguration",
   "EnableMultipleInterfaceDiscovery",
   "ServiceIdPrefix",
-  "ServiceInfoDiscovery"
+  "ServiceInfoDiscovery",
 }
 
 WiFiDirectServices = {
@@ -822,7 +956,7 @@ WiFiDirectServices = {
   "ServiceAddress",
   "ServiceConfigMethods",
   "ServiceInformation",
-  "ServiceName"
+  "ServiceName",
 }
 
 Winusb = {
@@ -831,23 +965,11 @@ Winusb = {
   "Device_PID",
   "Device_Protocol",
   "Device_SubClass",
-  "Device_VID"
+  "Device_VID",
 }
 
 WpdFs = {
-  "VolumePath"
-}
-
-WSD = {
-  "AepServiceList",
-  "AppSeqInstanceID",
-  "Challenge_Query",
-  "Convert_To_Multicast",
-  "FoundOnPublicNetwork",
-  "IPConnectionString",
-  "MetadataUpdated",
-  "Supports_DNS",
-  "WiFiDirectMacAddress"
+  "VolumePath",
 }
 
 DEVPKEY_LIST = (
@@ -862,8 +984,8 @@ DEVPKEY_LIST = (
   ("AepService", AepService),
   ("Bluetooth", Bluetooth),
   ("BluetoothLE", BluetoothLE),
-  ("Bthhfenum", Bthhfenum),
   ("DasParam", DasParam),
+  ("DevQuery", DevQuery),
   # ("Device", Device),
   ("DeviceClass", DeviceClass),
   # ("DeviceContainer", DeviceContainer),
@@ -873,8 +995,8 @@ DEVPKEY_LIST = (
   ("DeviceInterfaceClass", DeviceInterfaceClass),
   ("DeviceItem", DeviceItem),
   ("DeviceItemParam", DeviceItemParam),
+  ("DevicePanel", DevicePanel),
   ("DeviceSetup", DeviceSetup),
-  ("DevQuery", DevQuery),
   ("DriverDatabase", DriverDatabase),
   ("DriverFile", DriverFile),
   ("DriverInfFile", DriverInfFile),
@@ -884,30 +1006,33 @@ DEVPKEY_LIST = (
   ("DrvPkg", DrvPkg),
   # ("FirmwareResource", FirmwareResource),
   ("HdAudBus", HdAudBus),
+  ("IPP", IPP),
   ("Imaging", Imaging),
   ("InfraCast", InfraCast),
   ("IoT", IoT),
-  ("IPP", IPP),
   ("KsAudio", KsAudio),
-  ("Mbae", Mbae),
+  ("KsMidiPort", KsMidiPort),
   ("MTPBTH", MTPBTH),
+  ("Mbae", Mbae),
+  ("Midi", Midi),
   ("NFP", NFP),
+  ("PUBSVCS", PUBSVCS),
   # ("PciDevice", PciDevice),
   # ("PciRootBus", PciRootBus),
   ("Pos", Pos),
-  ("PUBSVCS", PUBSVCS),
-  ("Smartcard", Smartcard),
+  ("Radio", Radio),
   ("SSDP", SSDP),
+  ("Smartcard", Smartcard),
   ("Storage", Storage),
   ("TSUSB", TSUSB),
   ("UPNP", UPNP),
   ("User", User),
   ("WIA", WIA),
+  ("WSD", WSD),
   ("WiFi", WiFi),
   ("WiFiDirect", WiFiDirect),
   ("WiFiDirectParam", WiFiDirectParam),
   ("WiFiDirectServices", WiFiDirectServices),
   ("Winusb", Winusb),
   ("WpdFs", WpdFs),
-  ("WSD", WSD)
 )
