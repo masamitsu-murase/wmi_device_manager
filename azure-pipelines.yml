@@ -4,21 +4,23 @@ jobs:
   displayName: Windows
   pool:
     vmImage: 'vs2017-win2016'
+  strategy:
+    matrix:
+      python2:
+        python_version: 2
+      python3:
+        python_version: 3
   steps:
   - script: git config --global core.autoCRLF false
     displayName: "Disable git autoCRLF"
   - checkout: self
     displayName: "Checkout"
     fetchDepth: 50
-  - script: python tests/download_python.py python.exe 2
-    displayName: download python2
+  - script: pip install requests
+    displayName: Install requests
+  - script: python tests/download_python.py python.exe $(python_version)
+    displayName: Download python
   - script: tests\python.exe -c "import sys; print(sys.version)"
     displayName: version
   - script: tests\python.exe -m unittest tests.test_wmidevicemanager
-    displayName: Test Python2
-  - script: python tests/download_python.py python.exe 3
-    displayName: download python3
-  - script: tests\python.exe -c "import sys; print(sys.version)"
-    displayName: version
-  - script: tests\python.exe -m unittest tests.test_wmidevicemanager
-    displayName: Test Python3
+    displayName: Test Python

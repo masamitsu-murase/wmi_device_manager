@@ -2,12 +2,13 @@
 image:
 #   - Visual Studio 2015
   - Visual Studio 2017
+environment:
+  matrix:
+    - python_version: 2
+    - python_version: 3
 build: off
 test_script:
-  - python tests/download_python.py python.exe 2
-  - tests\python.exe -c "import sys; print(sys.version)"
-  - tests\python.exe -m unittest tests.test_wmidevicemanager
-  - python tests/download_python.py python.exe 3
+  - python tests/download_python.py python.exe %python_version%
   - tests\python.exe -c "import sys; print(sys.version)"
   - tests\python.exe -m unittest tests.test_wmidevicemanager
 deploy: off
