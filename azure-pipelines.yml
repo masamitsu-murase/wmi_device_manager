@@ -1,4 +1,15 @@
 
+trigger:
+  branches:
+    include:
+    - '*'
+  tags:
+    include:
+    - '*'
+pr:
+  branches:
+    include:
+    - '*'
 jobs:
 - job: windows
   displayName: Windows
