@@ -10,15 +10,15 @@ jobs:
   - checkout: self
     displayName: "Checkout"
     fetchDepth: 50
-  - script: ruby.exe python/download_python.rb python.exe 2
+  - script: ruby.exe tests/download_python.rb python.exe 2
     displayName: download python2
-  - script: python\python.exe -c "import sys; print(sys.version)"
+  - script: tests\python.exe -c "import sys; print(sys.version)"
     displayName: version
-  - script: python\python.exe python/test.py
+  - script: tests\python.exe python/test_wmidevicemanager.py
     displayName: Test Python2
-  - script: ruby.exe python/download_python.rb python.exe 3
+  - script: ruby.exe tests/download_python.rb python.exe 3
     displayName: download python3
-  - script: python\python.exe -c "import sys; print(sys.version)"
+  - script: tests\python.exe -c "import sys; print(sys.version)"
     displayName: version
-  - script: python\python.exe python/test.py
+  - script: tests\python.exe python/test_wmidevicemanager.py
     displayName: Test Python3

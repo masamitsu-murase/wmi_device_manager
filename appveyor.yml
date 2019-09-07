@@ -4,10 +4,10 @@ image:
   - Visual Studio 2017
 build: off
 test_script:
-  - C:\Ruby23\bin\ruby.exe python/download_python.rb python.exe 2
-  - python\python.exe -c "import sys; print(sys.version)"
-  - python\python.exe python/test.py
-  - C:\Ruby23\bin\ruby.exe python/download_python.rb python.exe 3
-  - python\python.exe -c "import sys; print(sys.version)"
-  - python\python.exe python/test.py
+  - C:\Ruby23\bin\ruby.exe tests/download_python.rb python.exe 2
+  - tests\python.exe -c "import sys; print(sys.version)"
+  - tests\python.exe tests/test_wmidevicemanager.py
+  - C:\Ruby23\bin\ruby.exe tests/download_python.rb python.exe 3
+  - tests\python.exe -c "import sys; print(sys.version)"
+  - tests\python.exe tests/test_wmidevicemanager.py
 deploy: off
