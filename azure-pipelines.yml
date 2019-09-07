@@ -14,11 +14,11 @@ jobs:
     displayName: download python2
   - script: tests\python.exe -c "import sys; print(sys.version)"
     displayName: version
-  - script: tests\python.exe -m unittest tests/test_wmidevicemanager.py
+  - script: tests\python.exe -m unittest tests.test_wmidevicemanager
     displayName: Test Python2
   - script: ruby.exe tests/download_python.rb python.exe 3
     displayName: download python3
   - script: tests\python.exe -c "import sys; print(sys.version)"
     displayName: version
-  - script: tests\python.exe -m unittest tests/test_wmidevicemanager.py
+  - script: tests\python.exe -m unittest tests.test_wmidevicemanager
     displayName: Test Python3
