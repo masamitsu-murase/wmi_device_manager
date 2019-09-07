@@ -8,7 +8,7 @@ environment:
     - python_version: 3
 build: off
 test_script:
-  - python utils/download_python.py python.exe %python_version%
+  - C:\Python37\python utils/download_python.py python.exe %python_version%
   - utils\python.exe -c "import sys; print(sys.version)"
   - utils\python.exe -m unittest tests.test_wmidevicemanager
 deploy: off
