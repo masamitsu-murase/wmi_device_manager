@@ -9,10 +9,9 @@ def find_all_keys(dll_path):
         check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL)
-    return [
-        x.rstrip() for x in result.stdout.split("\n")
-        if x.startswith("DEVPKEY")
-    ]
+    # Path for corner cases.
+    text = result.stdout.replace("|", "\n")
+    return [x.rstrip() for x in text.split("\n") if x.startswith("DEVPKEY")]
 
 
 def parse_keys(keys):
@@ -25,8 +24,8 @@ def parse_keys(keys):
         name = splitted_key[2]
 
         if group not in key_tree:
-            key_tree[group] = []
-        key_tree[group].append(name)
+            key_tree[group] = set()
+        key_tree[group].add(name)
     return key_tree
 
 
@@ -43,19 +42,20 @@ def output_const(key_tree):
     for key in sorted(key_tree.keys()):
         output += f"{key} = {{\n"
         for name in sorted(key_tree[key]):
-            output += f"  \"{name}\",\n"
+            output += f"    \"{name}\",\n"
         output += "}\n\n"
 
     output += "DEVPKEY_LIST = (\n"
+    output += "    # special groups\n"
     for key in special_groups:
-        output += f"  (\"{key}\", {key}),\n"
-    output += "\n"
+        output += f"    (\"{key}\", {key}),\n"
+    output += "    # other groups\n"
     for key in sorted(key_tree.keys()):
         line = f"(\"{key}\", {key}),"
         if key in special_groups:
-            output += f"  # {line}\n"
+            output += f"    # {line}\n"
         else:
-            output += f"  {line}\n"
+            output += f"    {line}\n"
     output += ")\n"
 
     return output
