@@ -81,6 +81,12 @@ class Win32PnpEntity(object):
         self._parent = parent
         self._children = tuple(children)
 
+    def reload(self):
+        if self._device_id is None:
+            raise RuntimeError('Cannot reload because device id is None.')
+        self._wmi_object = None
+        self.raw_object  # Reload _wmi_object based on _device_id.
+
     def __setattr__(self, key, value):
         if hasattr(self, "_properties_list") and key in self._properties_list:
             self.raw_object.Properties_[key].Value = value
