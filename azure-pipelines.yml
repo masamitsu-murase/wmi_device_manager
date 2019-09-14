@@ -84,3 +84,5 @@ jobs:
     displayName: Setup.py test
   - script: python utils/upload_to_pypi.py
     displayName: Upload to PyPI
+    env:
+      PYPI_API_TOKEN: $(PYPI_API_TOKEN)
