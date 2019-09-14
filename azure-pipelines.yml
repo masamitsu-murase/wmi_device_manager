@@ -65,3 +65,22 @@ jobs:
       isDraft: true
       isPreRelease: true
       addChangeLog: false
+- job: pypi_release
+  displayName: PyPI Release
+  pool:
+    vmImage: 'vs2017-win2016'
+  dependsOn: github_release
+  steps:
+  - script: git config --global core.autoCRLF false
+    displayName: "Disable git autoCRLF"
+  - checkout: self
+    displayName: "Checkout"
+    fetchDepth: 50
+  - script: pip install wheel
+    displayName: Install wheel
+  - script: pip install twine
+    displayName: Install twine
+  - script: python setup.py test
+    displayName: Setup.py test
+  - script: python utils/upload_to_pypi.py
+    displayName: Upload to PyPI
