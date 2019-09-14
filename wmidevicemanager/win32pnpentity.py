@@ -12,9 +12,9 @@ def _method_type(method, self, klass):
 
 
 def wrap_raw_wmi_object(obj):
-    if type(obj) == tuple:
+    if isinstance(obj, tuple):
         return tuple(wrap_raw_wmi_object(x) for x in obj)
-    elif type(obj) == list:
+    elif isinstance(obj, list):
         return [wrap_raw_wmi_object(x) for x in obj]
     elif hasattr(obj, "Properties_") and hasattr(obj, "Methods_"):
         return Win32PnpEntity(obj)
@@ -31,7 +31,7 @@ class Win32PnpEntity(object):
         self._parent = False  # Special value for "not initialized"
         self._children = False  # Special value for "not initialized"
 
-        if wmi_object is not None and "DeviceID" in self._properties_list:
+        if "DeviceID" in self._properties_list:
             self._device_id = wmi_object.Properties_["DeviceID"].Value
 
     def __getstate__(self):
