@@ -28,7 +28,7 @@ class WmiTest(unittest.TestCase):
             try:
                 print(i.DeviceID)
                 print(i.BiosDeviceName)
-            except:
+            except Exception:
                 pass
 
     def test_root_device(self):
@@ -41,19 +41,20 @@ class WmiTest(unittest.TestCase):
             return
 
         w = wmi.WmiDeviceManager()
-        first_pci_device = None
+        pci_device = None
         for i in w:
             try:
-                i.BiosDeviceName
-                i.Device_BiosDeviceName
-                i.DEVPKEY_Device_BiosDeviceName
                 loc = i.Device_LocationInfo
                 if re.search(u"PCI バス", loc) or re.search(r"PCI Bus", loc):
-                    if first_pci_device is None:
-                        first_pci_device = i
-            except:
+                    pci_device = i
+                    break
+            except Exception:
                 pass
-        self.assertIsNotNone(first_pci_device)
+        self.assertIsNotNone(pci_device)
+        self.assertIsNotNone(pci_device.BiosDeviceName)
+        self.assertTrue(
+            pci_device.BiosDeviceName == pci_device.Device_BiosDeviceName ==
+            pci_device.DEVPKEY_Device_BiosDeviceName)
 
     def test_find(self):
         dev = wmi.find_device(r"HTREE\ROOT\0")
@@ -77,10 +78,11 @@ class WmiTest(unittest.TestCase):
         set_w2 = set(map(lambda x: x.DeviceID, w2))
         self.assertEqual(set_w, set_w2)
 
-    @unittest.skipIf(os.environ.get("APPVEYOR", False), "AppVeyor may have yellow bang devices.")
-    def test_yellow_bang_devices(self):
-        ybd = wmi.yellow_bang_devices()
-        self.assertEqual(len(ybd), 0)
+    @unittest.skipIf(os.environ.get("APPVEYOR", False),
+                     "AppVeyor may have yellow bang devices.")
+    def test_error_devices(self):
+        devices = wmi.error_devices()
+        self.assertEqual(len(devices), 0)
 
     def test_wmi_find(self):
         wdm = wmi.WmiDeviceManager(False)
@@ -89,7 +91,8 @@ class WmiTest(unittest.TestCase):
         else:
             device_name = r"\_SB.PCI0"
         dev1 = wdm.find(lambda item: item.BiosDeviceName == device_name)
-        dev_list1 = wdm.select(lambda item: (item.BiosDeviceName or "").startswith(r"\_SB."))
+        dev_list1 = wdm.select(lambda item: (item.BiosDeviceName or "").
+                               startswith(r"\_SB."))
         self.assertIn(dev1, dev_list1)
 
         dev2 = wdm.find_by("BiosDeviceName", device_name)

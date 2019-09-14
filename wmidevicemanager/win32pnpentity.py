@@ -12,9 +12,9 @@ def _method_type(method, self, klass):
 
 
 def wrap_raw_wmi_object(obj):
-    if type(obj) == tuple:
+    if isinstance(obj, tuple):
         return tuple(wrap_raw_wmi_object(x) for x in obj)
-    elif type(obj) == list:
+    elif isinstance(obj, list):
         return [wrap_raw_wmi_object(x) for x in obj]
     elif hasattr(obj, "Properties_") and hasattr(obj, "Methods_"):
         return Win32PnpEntity(obj)
@@ -24,6 +24,11 @@ def wrap_raw_wmi_object(obj):
 
 class Win32PnpEntity(object):
     def __init__(self, wmi_object):
+        """Create a Win32PnpEntity.
+
+        :param wmi_object: A raw WMI object, which represents Win32_PnPEntity.
+        :type wmi_object: object
+        """
         self._wmi_object = wmi_object
         self._device_id = None
         self._properties_list = set(x.Name for x in wmi_object.Properties_)
@@ -31,7 +36,7 @@ class Win32PnpEntity(object):
         self._parent = False  # Special value for "not initialized"
         self._children = False  # Special value for "not initialized"
 
-        if wmi_object is not None and "DeviceID" in self._properties_list:
+        if "DeviceID" in self._properties_list:
             self._device_id = wmi_object.Properties_["DeviceID"].Value
 
     def __getstate__(self):
@@ -50,6 +55,11 @@ class Win32PnpEntity(object):
 
     @property
     def raw_object(self):
+        """A WMI object.
+
+        :return: WMI object
+        :rtype: object
+        """
         if self._wmi_object is None and self._device_id is not None:
             from .wmidevicemanager import _find_raw_device
             self._wmi_object = _find_raw_device(self._device_id)
@@ -57,6 +67,11 @@ class Win32PnpEntity(object):
 
     @property
     def parent(self):
+        """Return a parent device.
+
+        :return: Parent device.
+        :rtype: Win32PnpEntity
+        """
         if self._parent is False:
             parent = self.Device_Parent
             if parent is None or parent == "":
@@ -68,6 +83,11 @@ class Win32PnpEntity(object):
 
     @property
     def children(self):
+        """Return children devices.
+
+        :return: Children devices.
+        :rtype: Tuple[Win32PnpEntity]
+        """
         if self._children is False:
             children = self.Device_Children
             if children is None or len(children) == 0:
@@ -82,6 +102,8 @@ class Win32PnpEntity(object):
         self._children = tuple(children)
 
     def reload(self):
+        """Reload device status.
+        """
         if self._device_id is None:
             raise RuntimeError('Cannot reload because device id is None.')
         self._wmi_object = None
