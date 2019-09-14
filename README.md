@@ -1,6 +1,6 @@
 
 # WMI Device Manager
-
+[![PyPI version](https://badge.fury.io/py/wmidevicemanager.svg)](https://badge.fury.io/py/wmidevicemanager)
 [![Build Status](https://dev.azure.com/masamitsu-murase/wmi_device_manager/_apis/build/status/masamitsu-murase.wmi_device_manager?branchName=master)](https://dev.azure.com/masamitsu-murase/wmi_device_manager/_build/latest?definitionId=4&branchName=master)
 [![Build status](https://ci.appveyor.com/api/projects/status/ktrn3q6nkx9dvdwd?svg=true)](https://ci.appveyor.com/project/masamitsu-murase/wmi-device-manager)
 
