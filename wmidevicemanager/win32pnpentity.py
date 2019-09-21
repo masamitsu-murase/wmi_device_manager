@@ -22,7 +22,21 @@ def wrap_raw_wmi_object(obj):
         return obj
 
 
+def create_const_dict():
+    const_dict = {}
+    for name, values in const.DEVPKEY_LIST:
+        for value in values:
+            long_name = "DEVPKEY_" + name + "_" + value
+            for attr_name in (value, name + "_" + value,
+                              "DEVPKEY_" + name + "_" + value):
+                if attr_name not in const_dict:
+                    const_dict[attr_name] = long_name
+    return const_dict
+
+
 class Win32PnpEntity(object):
+    LONG_NAME_DICT = create_const_dict()
+
     def __init__(self, wmi_object):
         """Create a Win32PnpEntity.
 
@@ -130,28 +144,17 @@ class Win32PnpEntity(object):
         elif key in self._methods_list:
             return self._wrap_method(key)
         else:
-            pair = const.DEVPKEY_LIST
+            long_name = self.LONG_NAME_DICT.get(key)
             prop_value = None
-            for name, values in pair:
-                if key in values:
-                    prop_value = self.GetDeviceProperties(
-                        ["DEVPKEY_" + name + "_" + key]).deviceProperties[0]
-                    break
-                elif key.startswith(name + "_") and key[len(name) +
-                                                        1:] in values:
-                    prop_value = self.GetDeviceProperties(
-                        ["DEVPKEY_" + key]).deviceProperties[0]
-                    break
-                elif key.startswith("DEVPKEY_" + name +
-                                    "_") and key[8 + len(name) + 1:] in values:
-                    prop_value = self.GetDeviceProperties(
-                        [key]).deviceProperties[0]
-                    break
+            if long_name is not None:
+                prop_value = self.GetDeviceProperties([long_name
+                                                       ]).deviceProperties[0]
             if prop_value:
                 if prop_value.Type == 0:
                     return None
                 else:
                     return prop_value.Data
+
             if key in self.__dict__:
                 return self.__dict__[key]
             else:

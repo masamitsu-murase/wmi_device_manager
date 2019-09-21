@@ -19,7 +19,7 @@ g.__verbose__ = False
 class WmiTest(unittest.TestCase):
     def setUp(self):
         self._has_parent = False
-        if platform.version().split(",", 1)[0] == "10":
+        if platform.version().split(".", 1)[0] == "10":
             self._has_parent = True
 
     @unittest.skip("takes too long time")
@@ -52,10 +52,10 @@ class WmiTest(unittest.TestCase):
             except Exception:
                 pass
         self.assertIsNotNone(pci_device)
-        self.assertIsNotNone(pci_device.BiosDeviceName)
+        self.assertIsNotNone(pci_device.LocationInfo)
         self.assertTrue(
-            pci_device.BiosDeviceName == pci_device.Device_BiosDeviceName ==
-            pci_device.DEVPKEY_Device_BiosDeviceName)
+            pci_device.LocationInfo == pci_device.Device_LocationInfo ==
+            pci_device.DEVPKEY_Device_LocationInfo)
 
     def test_find(self):
         dev = wmi.find_device(r"HTREE\ROOT\0")
