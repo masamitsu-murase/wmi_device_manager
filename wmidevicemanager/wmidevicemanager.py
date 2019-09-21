@@ -15,7 +15,7 @@ def _wmi_object():
 
 
 def yellow_bang_devices():
-    warnings.warn("yellow_bang_devices is deprecated.")
+    warnings.warn("yellow_bang_devices is deprecated.", DeprecationWarning)
     return error_devices()
 
 

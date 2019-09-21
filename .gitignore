@@ -1,5 +1,10 @@
+__pycache__/
+env/
+venv/
+.vscode/
 *.pyc
 .eggs/
 build/
 *.egg-info/
 dist/
+cimwin32.dll
