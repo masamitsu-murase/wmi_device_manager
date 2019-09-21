@@ -6,4 +6,4 @@ __all__ = [
     "WmiDeviceManager", "error_devices", "find_device", "yellow_bang_devices",
     "Win32PnpEntity"
 ]
-__version__ = "1.2.2"
+__version__ = "1.2.3"

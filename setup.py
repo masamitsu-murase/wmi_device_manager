@@ -15,7 +15,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='wmidevicemanager',
-    version='1.2.2',
+    version='1.2.3',
     description='A library to get information in device manager based on WMI.',
     long_description=long_description,
     long_description_content_type='text/markdown',
