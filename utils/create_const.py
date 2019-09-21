@@ -1,17 +1,14 @@
 import argparse
-import subprocess
+import re
 
 
 def find_all_keys(dll_path):
-    result = subprocess.run(
-        ["strings", "-u", "-nobanner", "-n", "8", dll_path],
-        universal_newlines=True,
-        check=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.DEVNULL)
-    # Path for corner cases.
-    text = result.stdout.replace("|", "\n")
-    return [x.rstrip() for x in text.split("\n") if x.startswith("DEVPKEY")]
+    pattern = re.compile("DEVPKEY_".encode("utf-16le") +
+                         b"(?:[_a-zA-Z0-9]\x00)+")
+    with open(dll_path, "rb") as file:
+        content = file.read()
+    matches = pattern.findall(content)
+    return [m.decode("utf-16le") for m in matches]
 
 
 def parse_keys(keys):
@@ -63,7 +60,8 @@ def output_const(key_tree):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("cimwin32_dll")
+    parser.add_argument("cimwin32_dll",
+                        help="C:/Windows/System32/wbem/cimwin32.dll")
     parser.add_argument("output_const_py")
     args = parser.parse_args()
     output = output_const(parse_keys(find_all_keys(args.cimwin32_dll)))
