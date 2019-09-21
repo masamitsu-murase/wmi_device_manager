@@ -8,6 +8,7 @@ import pickle
 import unittest
 import os
 import platform
+import warnings
 
 # Do not create cache
 cc.gen_dir = None
@@ -100,6 +101,14 @@ class WmiTest(unittest.TestCase):
         self.assertIn(dev2, dev_list2)
 
         self.assertIs(dev1, dev2)
+
+    def test_warnings(self):
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            _ = wmi.yellow_bang_devices()
+            self.assertEqual(len(w), 1, "1 warning should be recorded.")
+            self.assertIsInstance(w[0].message, DeprecationWarning,
+                                  "yellow_bang_device is deprecated.")
 
 
 if __name__ == "__main__":
