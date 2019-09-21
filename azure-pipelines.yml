@@ -27,6 +27,10 @@ jobs:
   - checkout: self
     displayName: "Checkout"
     fetchDepth: 50
+  - script: pip install flake8
+    displayName: Install flake8
+  - script: python -m flake8 wmidevicemanager
+    displayName: Run flake8
   - script: pip install requests
     displayName: Install requests
   - script: python utils/download_python.py python.exe $(python_version)
