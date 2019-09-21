@@ -37,25 +37,21 @@ class WmiTest(unittest.TestCase):
             w = wmi.WmiDeviceManager()
             self.assertIsNotNone(w.root.DeviceID)
 
-    def test_pci_device(self):
-        if not self._has_parent:
-            return
-
+    def test_device_with_biosdevicename(self):
         w = wmi.WmiDeviceManager()
-        pci_device = None
+        device = None
         for i in w:
             try:
-                loc = i.Device_LocationInfo
-                if re.search(u"PCI バス", loc) or re.search(r"PCI Bus", loc):
-                    pci_device = i
+                loc = i.BiosDeviceName
+                if loc and loc.startswith(r"\_SB."):
+                    device = i
                     break
             except Exception:
                 pass
-        self.assertIsNotNone(pci_device)
-        self.assertIsNotNone(pci_device.LocationInfo)
-        self.assertTrue(
-            pci_device.LocationInfo == pci_device.Device_LocationInfo ==
-            pci_device.DEVPKEY_Device_LocationInfo)
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.BiosDeviceName)
+        self.assertTrue(device.BiosDeviceName == device.Device_BiosDeviceName
+                        == device.DEVPKEY_Device_BiosDeviceName)
 
     def test_find(self):
         dev = wmi.find_device(r"HTREE\ROOT\0")
