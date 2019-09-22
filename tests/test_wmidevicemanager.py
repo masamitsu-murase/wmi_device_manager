@@ -1,9 +1,7 @@
 # coding: utf-8
 
 import comtypes.client as cc
-import comtypes.client._generate as g
 import wmidevicemanager as wmi
-import re
 import pickle
 import unittest
 import os
@@ -12,8 +10,6 @@ import warnings
 
 # Do not create cache
 cc.gen_dir = None
-# Suppress debug messages
-g.__verbose__ = False
 
 
 class WmiTest(unittest.TestCase):
