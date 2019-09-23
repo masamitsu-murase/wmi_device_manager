@@ -9,6 +9,8 @@ This is a library to get information in device manager on Windows10 based on WMI
 You can get almost all information of device manager via this library.  
 For example, "BIOS Device Name", "Driver INF Path" and so on.
 
+See [DEVPROPKEY](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/define-devpropkey) section for more details.
+
 ## How to use
 
 Use files in `wmidevicemanager` directory.
@@ -17,16 +19,16 @@ You need to install `comtypes` library.
 
 ```python
 import wmidevicemanager
-wmi = wmidevicemanager.WmiDeviceManager()
-for x in wmi:
+wdm = wmidevicemanager.WmiDeviceManager()
+for x in wdm:
     print(x.DeviceID)
 
-pci_root = next(x for x in wmi if x.BiosDeviceName == r"\_SB.PCI0")
+pci_root = wdm.find_by("BiosDeviceName", r"\_SB.PCI0")
 for child in pci_root.children:
     print(child.DeviceID)
 
-for device in wmi:
-    if device.BiosDeviceName == r"\_SB.PCI0.RP01.PXSX" or device.BiosDeviceName == r"\_SB.PCI0.RP02.PXSX":
+for device in wdm:
+    if device.BiosDeviceName in (r"\_SB.PCI0.RP01.PXSX", r"\_SB.PCI0.RP02.PXSX"):
         device.Disable()
 ```
 
